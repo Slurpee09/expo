@@ -1,21 +1,36 @@
 import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 
 type MyButtonProps = {
   title: string;
-  onPress?: () => void; // optional
+  onPress?: () => void;
 };
 
 export default function MyButton({ title, onPress }: MyButtonProps) {
   return (
-    <View style={styles.buttonWrapper}>
-      <Button title={title}  />
-    </View>
+    <Pressable
+      style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
+      onPress={onPress}
+    >
+      <Text style={styles.buttonText}>{title}</Text>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  buttonWrapper: {
+  button: {
+    backgroundColor: '#10a3c8',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
     marginVertical: 10,
+  },
+  buttonPressed: {
+    opacity: 0.7,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
